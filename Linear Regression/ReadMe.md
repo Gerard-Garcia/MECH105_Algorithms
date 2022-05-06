@@ -1,4 +1,4 @@
-### Linear Regression Algorithm
+# Linear Regression Algorithm
 ## Created By: Gerard Garcia
 ### Goal:
 Lets recap what you need to do. I'm only partly sorry for writing a problem that needs a table of contents and summary.
