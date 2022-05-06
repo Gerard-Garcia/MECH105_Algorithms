@@ -1,4 +1,4 @@
-# MECH 105 SP22 Algorithms
+# MECH 105 SP22 MATLAB Algorithms
 ## Created By: Gerard Garcia
 This repository contains the algorithm assignments done in MECH 105 with Dr. Bechara. Each folder contains a MATLAB script and a file which describes how the code works.
 ### Algorithm Dates:
