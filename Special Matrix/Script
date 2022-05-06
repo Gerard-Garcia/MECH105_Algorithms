@@ -6,14 +6,14 @@ A = zeros(n,m);
 A(1,:) = [1:m];
 A(:,1) = [1:n];
 
-if nargin == 2
-    for i = 2:n
-        for k = 2:m
-            A(i,k) = A(i-1,k)+A(i,k-1);
+if nargin == 2 % if the number of inputs is 2 (both the rows and columns)
+    for i = 2:n % starts with the second row, goes to number of rows
+        for k = 2:m % starts with second column, goes to number of columns 
+            A(i,k) = A(i-1,k)+A(i,k-1); % new element value is the sum of the element above and the element to the left
         end                     
     end
 else
-    error('error')
+    error('error') % displays error if there are not enough inputs
 % Now the real challenge is to fill in the correct values of A
 
 end
@@ -23,3 +23,5 @@ end
 % The grading tests are not impacted by code in this section, and may test different cases than are given in the example here.
 %   If you want to use this in matlab directly (i.e. not online), you must save your function as a file specialMatrix.m
 %   and then can save this script as anything you like, say specialMatrixTest.m for example.
+n = 4; m = 5;
+specialMatrix(n,m)
