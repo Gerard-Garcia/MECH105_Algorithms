@@ -1,0 +1,65 @@
+function [fX, fY, slope, intercept, Rsquared] = linearRegression(x,y)
+% Name: Gerard Garcia
+% Date: 4/27/22
+%linearRegression Computes the linear regression of a data set
+%   Compute the linear regression based on inputs:
+%     1. x: x-values for our data set
+%     2. y: y-values for our data set
+%
+%   Outputs:
+%     1. fX: x-values with outliers removed
+%     2. fY: y-values with outliers removed
+%     3. slope: slope from the linear regression y=mx+b
+%     4. intercept: intercept from the linear regression y=mx+b
+%     5. Rsquared: R^2, a.k.a. coefficient of determination
+
+if size(x) ~= size(y)
+    error('The matrices are different sizes')
+end
+
+n = length(y);
+
+if issorted(x) == 1 && issorted(y) == 1
+    sortedX = x;
+    sortedY = y;
+else
+    [sortedY, sortOrder] = sort(y);
+    sortedX = x(sortOrder);
+end
+
+Q1value = floor((n+1)/4);
+Q3value = floor(((3*n)+3)/4);
+Q1 = sortedY(Q1value);
+Q3 = sortedY(Q3value);
+IQR = Q3-Q1;
+
+up = Q3 + 1.5*IQR;
+low = Q1 - 1.5*IQR;
+
+out = find(sortedY < low | sortedY > up);
+sortedX(out) = [];
+sortedY(out) = [];
+fX = sortedX;
+fY = sortedY;
+
+% Summations used for later calculations        
+ybar = mean(fY);
+xbar = mean(fX);
+sumxy = sum(fX.*fY);
+sumx = sum(fX);
+sumy = sum(fY);
+sumx2 = sum(fX.^2);
+sumy2 = sum(fY.^2);
+n = length(fX);
+
+% Normal equations
+a1 = ((n*sumxy)-(sumx*sumy))/((n*sumx2)-(sumx)^2);
+a0 = ybar - a1*xbar;
+yreg = a0 + a1*x;
+
+% R^2
+Rsquared = (((n*sumxy)-(sumx*sumy)) / (sqrt((n*sumx2)-sumx^2)*sqrt((n*sumy2)-sumy^2)))^2;
+
+slope = a1;
+intercept = a0
+end
